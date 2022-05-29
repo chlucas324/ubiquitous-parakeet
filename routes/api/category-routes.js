@@ -2,7 +2,7 @@ const router = require('express').Router();
 const { Category, Product } = require('../../models');
 
 // The `/api/categories` endpoint
-
+//get all categories
 router.get('/', (req, res) => {
   Category.findAll()
     .then(dbCategoryData => res.json(dbCategoryData))
@@ -10,10 +10,9 @@ router.get('/', (req, res) => {
       console.log(err);
       res.status(500).json(err);
     });
-  // find all categories
-  // be sure to include its associated Products
 });
 
+// api endpoint for one item
 router.get('/:id', (req, res) => {
   Category.findOne({
     where: {
@@ -33,8 +32,8 @@ router.get('/:id', (req, res) => {
   });
 });
 
-router.post('/', (req, res) => {
   // create a new category
+router.post('/', (req, res) => {
     Category.create({
       id: req.body.id,
       category_name: req.body.category_name,
@@ -46,8 +45,8 @@ router.post('/', (req, res) => {
       });
 });
 
-router.put('/:id', (req, res) => {
   // update a category by its `id` value
+router.put('/:id', (req, res) => {
   Category.update(req.body, {
     where: {
       id: req.params.id
@@ -66,8 +65,8 @@ router.put('/:id', (req, res) => {
     }); 
 });
 
+// delete a category by its `id` value
 router.delete('/:id', (req, res) => {
-  // delete a category by its `id` value
   Category.destroy({
     where: {
       id: req.params.id
