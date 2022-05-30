@@ -64,8 +64,8 @@ router.post('/', (req, res) => {
     price: req.body.price,
     stock: req.body.stock,
     category_id: req.body.category_id,
-    tagIds: req.body.tagIds
-  })
+    tagIds: req.body.tag_id
+    })
   //  Product.create(req.body)
     .then((product) => {
       // if there's product tags, we need to create pairings to bulk create in the ProductTag model
@@ -134,7 +134,7 @@ router.delete('/:id', (req, res) => {
   // delete one product by its `id` value
   Product.destroy({
     where: {
-      id: id.params.id
+      id: req.params.id
     }
   })
   .then(dbProductData => {
